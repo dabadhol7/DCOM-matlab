@@ -1,0 +1,75 @@
+clc;
+clear all:
+close all:
+%generator matrix
+
+G-[ 1 0 0 1 1 0
+    0 1 0 0 1 1
+    0 0 1 1 1 1 ] ;
+display (G):
+%parity matrix
+p-[ 1 1 0
+      0 1 1
+      1 1 1 ] ;
+display (p);
+%for data matrix
+m0=1;
+m1=0;
+m2=1;
+m= [m0 m1 m2];
+display (m);
+%parity check matrix
+h = [transpose (p), eye (3,3)];
+display (h);
+a0=xor (1,0);
+b0=xor (a0, 0);
+a1=xor (0,0);
+b1=xor (a1, 0);
+a2=xox (0,0);
+b2=xor (a2, 1);
+a3=xor (1, 0);
+b3=xor (a3, 1);
+a4=xor(1, 0);
+b4=xor(a0, 1);
+a5=xor (0, 0);
+b5=xor (a5, 1);
+ans1=[bo b1 b2 b3 b4 b5];
+display (ans1);
+%for h transpose
+transh=transpose (h);
+display (transh);
+r0=1;
+r1=0;
+r2=0;
+r3=1;
+r4=1;
+r5=1;
+r=[r5 r4 r3 r2 r1 r0];
+display(r);
+c2=xor(r2, r3);
+d2=xor(c2, r5);
+c1=xor(r1, r3);
+c11=xor(r4, c1);
+d1=xor(r5, c11);
+c0=xor(r0, r3);
+d0=xor(r4, c0);
+syndrome={ d2 d1 d0};
+display(syndrome);
+display('error, will modify r');
+r0=1;
+r1=0;
+r2=0;
+r3=1;
+r4=0;
+r5=1;
+MODIFIER= [r5 r4 r3 r2 r1 r0];
+display(MODIFIER);
+c2=xor(r2, r3);
+d2=xor(c2, r5);
+c1=xor(r1, r3);
+c11=xor(r4, c1);
+d1=xor(r5, c11);
+c0=xor(r0, r3);
+d0=xor(r4, c0);
+correct syndrome = [d2 d1 d0];
+display(correctsyndrome);
